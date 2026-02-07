@@ -54,5 +54,4 @@
       };
     };
   });
-  nixosModules.jonafonts = ./module.nix;
 }
