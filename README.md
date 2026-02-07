@@ -57,7 +57,7 @@ in
 }
 ```
 
-Or, import the Jonafonts [flake](https://github.com/librepup/fonts/blob/main/flake.nix) into your `flake.nix`, and enable the NixOS system module to install the font for you, like this:
+Or, import the Jonafonts [flake](https://github.com/librepup/fonts/blob/main/flake.nix) into your `flake.nix`, and install the Jonafonts Bundle, like this:
 ```nix
 {
   description = "My Flake";
@@ -73,22 +73,14 @@ Or, import the Jonafonts [flake](https://github.com/librepup/fonts/blob/main/fla
       # ... your Hostname below ...
       nixosConfigurations.HOSTNAME = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = {
-          inherit inputs;
-        };
-        modules = [
-          # ... your other Modules ...
-          # Import Jonafonts System Module:
-          self.inputs.jonafonts.nixosModules.jonafonts
-        ];
         ({ config, pkgs, lib, ... }:
-          {
-            imports = [
-              # ... your Imports ...
+        {
+          fonts = {
+            packages = with pkgs; [
+              jonafonts.packages.${system}.jonafonts
             ];
-            # Enable Jonafonts NixOS Installation Module
-            jonafonts.enable = true;
-          }
+          };
+        }
         )
       }
     };
