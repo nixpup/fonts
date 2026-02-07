@@ -53,7 +53,6 @@
         mainProgram = "jonafonts";
       };
     };
-
-    nixosModules.jonafonts = ./module.nix;
   });
+  nixosModules.jonafonts = ./module.nix;
 }
