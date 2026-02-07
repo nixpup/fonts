@@ -1,12 +1,13 @@
-{ stdenv, lib, pkgs, ... }:
+{ stdenv, lib, pkgs, fetchgit, fetchFromGitHub, ... }:
 
 stdenv.mkDerivation {
   pname = "Jonafonts";
   version = "1.0";
 
-  src = pkgs.fetchzip {
-    url = "https://github.com/librepup/fonts/archive/refs/heads/main.zip";
-    hash = "sha256-dPb9IHvIDst7z7MzO+MHx5n6hig1aW5Now8H0SUnNrk=";
+  src = fetchgit {
+    url = "https://github.com/librepup/fonts";
+    rev = "7e66a771287adbc86d3b6a27f7e0ffa36215f742";
+    hash = "sha256-bbv2ByQP5OuA+n+oRmOIcPGhGkyLuUxmWyMj9G/CHs4=";
   };
 
   dontBuild = true;
@@ -22,7 +23,9 @@ stdenv.mkDerivation {
   '';
 
   meta = with lib; {
+    homepage = "https://github.com/librepup";
     description = "Jonafonts Fonts Bundle";
+    maintainers = [ maintainers.librepup ];
     license = licenses.gpl3;
     platforms = platforms.all;
   };
